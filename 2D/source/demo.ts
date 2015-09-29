@@ -44,12 +44,72 @@ class Demo {
         this.createPieParts(values);
         this.assignEvents();
     }
+    
+    /**
+     * Draws the chart :)
+     */    
+    public draw(): void {
+        var c: CanvasRenderingContext2D = this._context;
+
+        c.clearRect(0, 0, this._width, this._height);
+
+        this._pieParts.forEach(part => {
+            part.draw();
+        });
+    }
+    
+    /**
+     * Stops the animation sequence 
+     */    
+    private stopAnimation(): void {
+        window.cancelAnimationFrame(this._animationFrame);
+        this._animationFrame = undefined;
+    }
 
     /**
-     * Returns the devicePixelRatio or 1 
+     * Starts the animation sequence
      */    
-    private getDevicePixelRatio(): number {
-        return window.devicePixelRatio || 1;
+    private startAnimation(): void {
+        var that = this;
+        var animationframeCallback = function() {
+            that._pieParts.forEach(part => {
+                part.rotation += that.degreesToRadiants(1);
+            });
+
+            that.draw();
+
+            that._animationFrame = window.requestAnimationFrame(animationframeCallback);
+        }
+
+        that._animationFrame = window.requestAnimationFrame(animationframeCallback);
+    }
+    
+    /**
+     * Assigns mouse and touch events to the canvas
+     */
+    private assignEvents(): void {
+        var that = this;
+
+        that._canvas.addEventListener('mousemove', event => {
+            event.preventDefault();
+            that.handleMouseMove(event.layerX, event.layerY);
+        });
+
+        that._canvas.addEventListener('click', event => {
+            event.preventDefault();
+            that.toggleAnimation();
+        });
+
+        that._canvas.addEventListener('touchstart', event => {
+            event.preventDefault();
+            that.toggleAnimation();
+        });
+
+        that._canvas.addEventListener('touchmove', event => {
+            event.preventDefault();
+            console.log('touchmove');
+            that.handleTouchMoveEvent(<TouchEvent>event);
+        });
     }
     
     /**
@@ -67,6 +127,13 @@ class Demo {
 
             this._context.scale(factor, factor);
         }
+    }
+    
+    /**
+     * Returns the devicePixelRatio or 1 
+     */    
+    private getDevicePixelRatio(): number {
+        return window.devicePixelRatio || 1;
     }
     
     /**
@@ -106,34 +173,6 @@ class Demo {
             this._pieParts.push(arc);
         });
     }
-    
-    /**
-     * Assigns mouse and touch events to the canvas
-     */
-    private assignEvents(): void {
-        var that = this;
-
-        that._canvas.addEventListener('mousemove', event => {
-            event.preventDefault();
-            that.handleMouseMove(event.layerX, event.layerY);
-        });
-
-        that._canvas.addEventListener('click', event => {
-            event.preventDefault();
-            that.toggleAnimation();
-        });
-
-        that._canvas.addEventListener('touchstart', event => {
-            event.preventDefault();
-            that.toggleAnimation();
-        });
-
-        that._canvas.addEventListener('touchmove', event => {
-            event.preventDefault();
-            console.log('touchmove');
-            that.handleTouchMoveEvent(<TouchEvent>event);
-        });
-    }
 
     /**
      * Toggles the animation
@@ -144,28 +183,6 @@ class Demo {
         }
 
         this.startAnimation();
-    }
-    
-    /**
-     * Returns the correct positions of an event (mouse/touch)
-     * 
-     * See: http://stackoverflow.com/a/10816667/959687
-     */
-    private getOffset(event: any): any {
-        var el = event.target,
-            x = 0,
-            y = 0;
-
-        while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-            x += el.offsetLeft - el.scrollLeft;
-            y += el.offsetTop - el.scrollTop;
-            el = el.offsetParent;
-        }
-
-        x = event.clientX - x;
-        y = event.clientY - y;
-
-        return { x: x, y: y };
     }
 
     /**
@@ -208,43 +225,26 @@ class Demo {
             that.draw();
         });
     }
-
+    
     /**
-     * Starts the animation sequence
-     */    
-    private startAnimation(): void {
-        var that = this;
-        var animationframeCallback = function() {
-            that._pieParts.forEach(part => {
-                part.rotation += that.degreesToRadiants(1);
-            });
+     * Returns the correct positions of an event (mouse/touch)
+     * 
+     * See: http://stackoverflow.com/a/10816667/959687
+     */
+    private getOffset(event: any): any {
+        var el = event.target,
+            x = 0,
+            y = 0;
 
-            that.draw();
-
-            that._animationFrame = window.requestAnimationFrame(animationframeCallback);
+        while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+            x += el.offsetLeft - el.scrollLeft;
+            y += el.offsetTop - el.scrollTop;
+            el = el.offsetParent;
         }
 
-        that._animationFrame = window.requestAnimationFrame(animationframeCallback);
-    }
+        x = event.clientX - x;
+        y = event.clientY - y;
 
-    /**
-     * Stops the animation sequence 
-     */    
-    private stopAnimation(): void {
-        window.cancelAnimationFrame(this._animationFrame);
-        this._animationFrame = undefined;
-    }
-
-    /**
-     * Draws the chart :)
-     */    
-    public draw(): void {
-        var c: CanvasRenderingContext2D = this._context;
-
-        c.clearRect(0, 0, this._width, this._height);
-
-        this._pieParts.forEach(part => {
-            part.draw();
-        });
+        return { x: x, y: y };
     }
 }
