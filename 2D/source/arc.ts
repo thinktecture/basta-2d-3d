@@ -4,6 +4,10 @@ class Arc {
     constructor(context: CanvasRenderingContext2D) {
         this._context = context;
     }
+    
+    public draw(): void {
+        // TODO: Code me!
+    }  
 
     private _centerX: number;
     public get centerX(): number {
@@ -67,18 +71,5 @@ class Arc {
     }
     public set alpha(v : number) {
         this._alpha = v;
-    }
-    
-    public draw(): void {
-        this._context.save();
-        this._context.translate(this.centerX, this.centerY);
-        this._context.rotate(this.rotation);
-        this._context.fillStyle = 'rgba(' + this._color.join() + ',' + this._alpha + ')';
-        this._context.beginPath();
-        this._context.moveTo(0, 0);
-        this._context.arc(0, 0, this.radius, this.startAngle, this.endAngle);
-        this._context.closePath();
-        this._context.fill();
-        this._context.restore();
-    }    
+    }  
 }
