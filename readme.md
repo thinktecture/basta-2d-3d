@@ -1,6 +1,6 @@
-# .NET UserGroup 2D & 3D Examples
+# BASTA! Herbst 2015 - 2D- und 3D-Datenvisualisierung für alle Plattformen mit HTML5
 
-This repository contains the examples shown in .NET User Group talks. 
+This repository contains the examples shown and more. 
 
 # 2D
 
@@ -16,6 +16,7 @@ Example1 to Example7 are consecutively built. Example1 is the base, Example2 is 
 6. Example: Mouse Move
 7. Example: Touch Move
 8. Example: Manipulating a rectangle with HammerJS
+9. Example: Rotating Pie Chart
 
 ## Requirements
 
