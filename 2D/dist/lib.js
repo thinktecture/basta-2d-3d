@@ -4,6 +4,9 @@ var Arc = (function () {
         this._alpha = 1;
         this._context = context;
     }
+    Arc.prototype.draw = function () {
+        // TODO: Code me!
+    };
     Object.defineProperty(Arc.prototype, "centerX", {
         get: function () {
             return this._centerX;
@@ -84,18 +87,6 @@ var Arc = (function () {
         enumerable: true,
         configurable: true
     });
-    Arc.prototype.draw = function () {
-        this._context.save();
-        this._context.translate(this.centerX, this.centerY);
-        this._context.rotate(this.rotation);
-        this._context.fillStyle = 'rgba(' + this._color.join() + ',' + this._alpha + ')';
-        this._context.beginPath();
-        this._context.moveTo(0, 0);
-        this._context.arc(0, 0, this.radius, this.startAngle, this.endAngle);
-        this._context.closePath();
-        this._context.fill();
-        this._context.restore();
-    };
     return Arc;
 })();
 
@@ -114,13 +105,28 @@ var Demo = (function () {
         this._height = canvas.height;
         this.adjustForRetina();
         this.createPieParts(values);
-        this.assignEvents();
+        //this.assignEvents();
     }
     /**
-     * Returns the devicePixelRatio or 1
+     * Draws the chart :)
      */
-    Demo.prototype.getDevicePixelRatio = function () {
-        return window.devicePixelRatio || 1;
+    Demo.prototype.draw = function () {
+        var c = this._context;
+        // TODO: Code me!
+    };
+    /**
+     * Starts the animation sequence
+     */
+    Demo.prototype.startAnimation = function () {
+        var that = this;
+        // TODO: Code me!
+    };
+    /**
+     * Assigns mouse and touch events to the canvas
+     */
+    Demo.prototype.assignEvents = function () {
+        var that = this;
+        // TODO: Code me!
     };
     /**
      * Adjusts the canvas and the context for retina scaling (if devicePixelRatio > 1)
@@ -134,6 +140,12 @@ var Demo = (function () {
             this._canvas.style.height = this._height + 'px';
             this._context.scale(factor, factor);
         }
+    };
+    /**
+     * Returns the devicePixelRatio or 1
+     */
+    Demo.prototype.getDevicePixelRatio = function () {
+        return window.devicePixelRatio || 1;
     };
     /**
      * Returns a random color
@@ -169,29 +181,6 @@ var Demo = (function () {
         });
     };
     /**
-     * Assigns mouse and touch events to the canvas
-     */
-    Demo.prototype.assignEvents = function () {
-        var that = this;
-        that._canvas.addEventListener('mousemove', function (event) {
-            event.preventDefault();
-            that.handleMouseMove(event.layerX, event.layerY);
-        });
-        that._canvas.addEventListener('click', function (event) {
-            event.preventDefault();
-            that.toggleAnimation();
-        });
-        that._canvas.addEventListener('touchstart', function (event) {
-            event.preventDefault();
-            that.toggleAnimation();
-        });
-        that._canvas.addEventListener('touchmove', function (event) {
-            event.preventDefault();
-            console.log('touchmove');
-            that.handleTouchMoveEvent(event);
-        });
-    };
-    /**
      * Toggles the animation
      */
     Demo.prototype.toggleAnimation = function () {
@@ -199,22 +188,6 @@ var Demo = (function () {
             return this.stopAnimation();
         }
         this.startAnimation();
-    };
-    /**
-     * Returns the correct positions of an event (mouse/touch)
-     *
-     * See: http://stackoverflow.com/a/10816667/959687
-     */
-    Demo.prototype.getOffset = function (event) {
-        var el = event.target, x = 0, y = 0;
-        while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-            x += el.offsetLeft - el.scrollLeft;
-            y += el.offsetTop - el.scrollTop;
-            el = el.offsetParent;
-        }
-        x = event.clientX - x;
-        y = event.clientY - y;
-        return { x: x, y: y };
     };
     /**
      * Handles touch move. Will move the pie chart
@@ -251,20 +224,6 @@ var Demo = (function () {
         });
     };
     /**
-     * Starts the animation sequence
-     */
-    Demo.prototype.startAnimation = function () {
-        var that = this;
-        var animationframeCallback = function () {
-            that._pieParts.forEach(function (part) {
-                part.rotation += that.degreesToRadiants(1);
-            });
-            that.draw();
-            that._animationFrame = window.requestAnimationFrame(animationframeCallback);
-        };
-        that._animationFrame = window.requestAnimationFrame(animationframeCallback);
-    };
-    /**
      * Stops the animation sequence
      */
     Demo.prototype.stopAnimation = function () {
@@ -272,14 +231,20 @@ var Demo = (function () {
         this._animationFrame = undefined;
     };
     /**
-     * Draws the chart :)
+     * Returns the correct positions of an event (mouse/touch)
+     *
+     * See: http://stackoverflow.com/a/10816667/959687
      */
-    Demo.prototype.draw = function () {
-        var c = this._context;
-        c.clearRect(0, 0, this._width, this._height);
-        this._pieParts.forEach(function (part) {
-            part.draw();
-        });
+    Demo.prototype.getOffset = function (event) {
+        var el = event.target, x = 0, y = 0;
+        while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+            x += el.offsetLeft - el.scrollLeft;
+            y += el.offsetTop - el.scrollTop;
+            el = el.offsetParent;
+        }
+        x = event.clientX - x;
+        y = event.clientY - y;
+        return { x: x, y: y };
     };
     return Demo;
 })();

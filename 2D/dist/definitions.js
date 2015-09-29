@@ -1,6 +1,7 @@
 declare class Arc {
     private _context;
     constructor(context: CanvasRenderingContext2D);
+    draw(): void;
     private _centerX;
     centerX: number;
     private _centerY;
@@ -17,7 +18,6 @@ declare class Arc {
     color: Array<number>;
     private _alpha;
     alpha: number;
-    draw(): void;
 }
 
 /// <reference path="../typings/tsd.d.ts" />
@@ -49,13 +49,25 @@ declare class Demo {
     private _animationFrame;
     constructor(canvas: HTMLCanvasElement, values: Array<number>);
     /**
-     * Returns the devicePixelRatio or 1
+     * Draws the chart :)
      */
-    private getDevicePixelRatio();
+    draw(): void;
+    /**
+     * Starts the animation sequence
+     */
+    private startAnimation();
+    /**
+     * Assigns mouse and touch events to the canvas
+     */
+    private assignEvents();
     /**
      * Adjusts the canvas and the context for retina scaling (if devicePixelRatio > 1)
      */
     private adjustForRetina();
+    /**
+     * Returns the devicePixelRatio or 1
+     */
+    private getDevicePixelRatio();
     /**
      * Returns a random color
      */
@@ -69,19 +81,9 @@ declare class Demo {
      */
     private createPieParts(values);
     /**
-     * Assigns mouse and touch events to the canvas
-     */
-    private assignEvents();
-    /**
      * Toggles the animation
      */
     private toggleAnimation();
-    /**
-     * Returns the correct positions of an event (mouse/touch)
-     *
-     * See: http://stackoverflow.com/a/10816667/959687
-     */
-    private getOffset(event);
     /**
      * Handles touch move. Will move the pie chart
      */
@@ -91,15 +93,13 @@ declare class Demo {
      */
     private handleMouseMove(x, y);
     /**
-     * Starts the animation sequence
-     */
-    private startAnimation();
-    /**
      * Stops the animation sequence
      */
     private stopAnimation();
     /**
-     * Draws the chart :)
+     * Returns the correct positions of an event (mouse/touch)
+     *
+     * See: http://stackoverflow.com/a/10816667/959687
      */
-    draw(): void;
+    private getOffset(event);
 }
