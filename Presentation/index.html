@@ -24,6 +24,10 @@
             <script src="lib/js/html5shiv.js"></script>
         <![endif]-->
         <style>
+            html {
+                background-color: inherit;
+            }
+
             .reveal {
                background-image: url('images/basta-footer.png'); 
                background-position: center bottom;
@@ -132,8 +136,8 @@
                 <section>
                     <h1>Cross Platform</h1>
                     
-                    <table>
-                        <thead>
+                    <table class="fragment">
+                        <thead class="fragment">
                             <tr>
                                 <th style="width: 33%">
                                     Native
@@ -148,21 +152,21 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="vertical-align: top">
+                                <td style="vertical-align: top" class="fragment">
                                     <ul>
                                         <li>One app per platform</li>
                                         <li>Less to none code sharing</li>
                                         <li>Java/Swift/C#</li>
                                     </ul>
                                 </td>
-                                <td  style="vertical-align: top">
+                                <td  style="vertical-align: top" class="fragment">
                                     <ul>
                                         <li>One app per supported platforms</li>
                                         <li>Medium code sharing</li>
                                         <li>Xamarin (C#)</li>
                                     </ul>
                                 </td>
-                                <td style="vertical-align: top">
+                                <td style="vertical-align: top" class="fragment">
                                     <ul>
                                         <li>One app for all</li>
                                         <li>High code sharing</li>
