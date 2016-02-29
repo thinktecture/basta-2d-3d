@@ -29,7 +29,7 @@
             }
 
             .reveal {
-               background-image: url('images/basta-footer.png'); 
+               background-image: url('images/basta-spring-footer.png');
                background-position: center bottom;
                background-repeat: no-repeat;
                background-size: contain;
@@ -38,9 +38,16 @@
             .frontpage > * {
                 visibility: hidden;
             }
-            
+
+            body .reveal .slide-number {
+                right: 5px;
+                bottom: 5px;
+                font-weight: bold;
+                color: white;
+            }
+
             .reveal .controls {
-                bottom: 75px;
+                bottom: 90px;
             }
             
             .no-border {
@@ -57,7 +64,7 @@
         <div class="reveal">
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
-                <section class="frontpage" data-background="images/basta-background.png">
+                <section class="frontpage" data-background="images/basta-spring-background.png">
                     <h1>2D &amp; 3D visualizations</h1>
                     <h3>Cross platform, touch optimized</h3>
                     <p>
@@ -66,10 +73,6 @@
                     <p><img src="images/ttLogo.png" style="width: 15%" class="tt-logo" /><br/>
                     <small><a href="http://thinktecture.com" class="tt-link">thinktecture.com</a></small></p>
                 </section>
-                <section>
-                    <h3>Special Day &quot;HTML5 Cross-Plattform&quot;</h3>
-                    <img src="images/overview.png" class="strech no-border no-shadow" />
-                </section>    
                 <section>
                     <h2>Introduction</h2>
                     <table class="narrow">
@@ -82,12 +85,14 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <p><small>christian.liebel@thinktecture.com</small>
-                                    <p><small>@chris_liebel</small></p>
+                                    <p><small>christian.liebel@thinktecture.com</small><br/>
+                                        <small><a href="https://christianliebel.com">https://christianliebel.com</a></small><br/>
+                                    <small>@chris_liebel</small></p>
                                 </td>
                                 <td>
-                                    <p><small>manuel.rauber@thinktecture.com</small></p>
-                                    <p><small>@manuelrauber</small></p>
+                                    <p><small>manuel.rauber@thinktecture.com</small><br/>
+                                        <small><a href="https://manuel-rauber.com">https://manuel-rauber.com</a></small><br/>
+                                    <small>@manuelrauber</small></p>
                                 </td>
                             </tr>
                         </tbody>
@@ -647,7 +652,7 @@ function stopAnimation() {
                 <section>
                     <h1>Thank you!</h1>
                     <p>
-                        GitHub repository: <br/><a href="https://github.com/thinktecture/basta-herbst-2015-2d-3d">https://github.com/thinktecture/basta-herbst-2015-2d-3d</a>
+                        GitHub repository: <br/><a href="https://github.com/thinktecture/basta-2d-3d">https://github.com/thinktecture/basta-2d-3d</a>
                     </p>
                     <div style="height: 150px"></div>
                     <p><img src="images/ttLogo.png" style="width: 15%" class="tt-logo" /><br/>
@@ -657,7 +662,7 @@ function stopAnimation() {
                     <h1>Resources</h1>
                     <small>
                     <ul>
-                        <li>GitHub repository: <a href="https://github.com/thinktecture/basta-herbst-2015-2d-3d">https://github.com/thinktecture/basta-herbst-2015-2d-3d</a></li>
+                        <li>GitHub repository: <a href="https://github.com/thinktecture/basta-2d-3d">https://github.com/thinktecture/basta-2d-3d</a></li>
                         <li>Canvas browser support: <a href="http://caniuse.com/#search=canvas">http://caniuse.com/#search=canvas</a></li>
                         <li>Cordova: <a href="https://cordova.apache.org/">https://cordova.apache.org/</a></li>
                         <li>Ionic: <a href="http://ionicframework.com/">http://ionicframework.com/</a></li>
@@ -668,9 +673,6 @@ function stopAnimation() {
                         <li>requestAnimationFrame: <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame</a></li>  
                     </ul></small>
                 </section>
-                <section>
-                    <img src="images/entwicklerspezial.png" class="entwicklerspezial" />    
-                </section>
             </div>
         </div>
         <script src="lib/js/head.min.js"></script>
@@ -679,7 +681,9 @@ function stopAnimation() {
             // Full list of configuration options available at:
             			// https://github.com/hakimel/reveal.js#configuration
             			Reveal.initialize({
+                            controls: false,
                             history: true,
+                            slideNumber: true,
             				transition: 'slide', // none/fade/slide/convex/concave/zoom
             
             				// Optional reveal.js plugins
