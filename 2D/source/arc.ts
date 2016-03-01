@@ -6,6 +6,7 @@ class Arc {
     }
     
     public draw(): void {
+        var c: CanvasRenderingContext2D = this._context;
         // TODO: Code me!
     }  
 
