@@ -39,7 +39,7 @@ class Demo {
         this._width = canvas.width;
         this._height = canvas.height;
 
-        this.adjustForRetina();
+        //this.adjustForRetina();
         this.createPieParts(values);
         this.assignEvents();
     }
