@@ -1,4 +1,3 @@
-/// <reference path="../typings/tsd.d.ts" />
 /// <reference path="arc.ts" />
 
 class Demo {
@@ -42,7 +41,7 @@ class Demo {
 
         this.adjustForRetina();
         this.createPieParts(values);
-        //this.assignEvents();
+        this.assignEvents();
     }
     
     /**
