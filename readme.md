@@ -1,4 +1,4 @@
-# BASTA! Herbst 2015 - 2D- und 3D-Datenvisualisierung für alle Plattformen mit HTML5
+# BASTA! - 2D- und 3D-Datenvisualisierung für alle Plattformen mit HTML5
 
 This repository contains the examples shown and more. 
 
