@@ -29,7 +29,7 @@ The examples are written in TypeScript and will be compiled to ES5 using gulp. T
 
 1. Point your terminal to the 2D subfolder.
 2. Execute `npm install` to install all necessary packages.
-3. Execute `sh build.sh` to start the default gulp task, which will compile the *.ts files, concat them into a single file and outputs it to the dist folder. Sourcemaps are generated, too.
+3. Execute `npm start` to start the default gulp task, which will compile the *.ts files, concat them into a single file and outputs it to the dist folder. Sourcemaps are generated, too.
 4. Optional: Execute `node_modules/.bin/tsd reinstall --save --overwrite` to install type definitions for better intellisense for the `gulpfile.js`.
 5. Open index.html in your browser
 
@@ -41,7 +41,7 @@ By using query parameters you can switch, which example will be used for renderi
 
 ## Cordova
 
-The 2D examples can be deployed to iOS and Android by cordova. All necessary files are included in the cordova folder. To run, just use the provides `deploy.sh` script by executing `sh deploy.sh`. 
+The 2D examples can be deployed to iOS and Android by cordova. All necessary files are included in the cordova folder. To run, just use the provides `deploy.sh` script by executing `npm run deploy`. 
 It will use gulp for copying the files to the cordova/www folder and then executes `cordova run --device` which will deploy to all connected devices. 
 
 # 3D
